@@ -1,0 +1,7 @@
+.login-wrapper {
+    height: 100vh;
+}
+
+.login-wrapper form {
+    width: 400px;
+}

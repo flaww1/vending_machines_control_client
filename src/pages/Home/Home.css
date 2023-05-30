@@ -1,0 +1,16 @@
+.home-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.card-deck {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 300px;
+    margin: 0 10px;
+}
