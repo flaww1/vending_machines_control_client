@@ -1,0 +1,26 @@
+/* Custom CSS for MachineDetailsPage */
+
+.container {
+    margin-top: 50px;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-unstyled li {
+    margin-bottom: 0.5rem;
+}

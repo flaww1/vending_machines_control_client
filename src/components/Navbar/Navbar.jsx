@@ -28,6 +28,9 @@ function Navbar() {
                     <li className="nav-item">
                         <NavLink className="nav-link" activeClassName="active" to="/registration">Registration</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" activeClassName="active" to="/dashboard">Dashboard</NavLink>
+                    </li>
                 </ul>
             </div>
         </nav>

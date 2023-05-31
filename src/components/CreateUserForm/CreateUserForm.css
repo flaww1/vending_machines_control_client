@@ -1,0 +1,41 @@
+.create-user-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.create-user-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.create-user-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.create-user-form input[type="text"],
+.create-user-form input[type="email"],
+.create-user-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.create-user-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-user-form button[type="submit"]:hover {
+    background-color: #45a049;
+}
