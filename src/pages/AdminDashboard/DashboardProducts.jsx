@@ -1,23 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './AdminDashboard.css';
-
+import CreateProductForm from '../../components/CreateForms/CreateProductForm';
+import Modal from 'react-modal';
 
 function DashboardProducts() {
+    const [isCreateProductFormOpen, setCreateProductFormOpen] = useState(false);
 
-    const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTY4NTM2NDA2MCwiZXhwIjoxNjg3OTU2MDYwfQ.zbDnYOWxvplEBP3redatqu1N7DtO3vpdhE8nFJF8B_w';
+    const handleCreateProductClick = () => {
+        setCreateProductFormOpen(true);
+    };
+
+    const token =localStorage.getItem('usertoken');
+
     const headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        "Accept": 'application/json'
-    }
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+    };
     const [data, setData] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:5000/dashboard/admin/products', { headers })
-            .then(response => response.json())
-            .then(jsonResponse => setData(jsonResponse.products));
+            .then((response) => response.json())
+            .then((jsonResponse) => setData(jsonResponse.products));
     }, []);
+
+
     return (
         <div className="d-flex" id="wrapper">
             {/* Sidebar */}
@@ -52,17 +60,19 @@ function DashboardProducts() {
                 </div>
             </div>
             {/* /#sidebar-wrapper */}
-
-            {/* Page Content */}
             <div id="page-content-wrapper">
                 <div className="container-fluid px-4">
                     <div className="row my-5">
                         <h3 className="fs-4 mb-3">Products</h3>
                         <div className="col">
+                            <div className="text-end">
+                                <button className="btn btn-primary" onClick={handleCreateProductClick}>
+                                    Create Product
+                                </button>
+                            </div>
                             <table className="table bg-white rounded shadow-sm table-hover">
                                 <thead>
                                 <tr>
-
                                     <th scope="col">ID</th>
                                     <th scope="col">Product</th>
                                     <th scope="col">Type</th>
@@ -70,8 +80,6 @@ function DashboardProducts() {
                                     <th scope="col">Description</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Options</th>
-
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -81,30 +89,39 @@ function DashboardProducts() {
                                             <th scope="row">{product.productId}</th>
                                             <td>{product.name}</td>
                                             <td>{product.type}</td>
-                                            <td><img src={product.image} alt="product" width="100px"/></td>
+                                            <td>
+                                                <img src={product.image} alt="product" width="100px" />
+                                            </td>
                                             <td>{product.description}</td>
                                             <td>{product.price}</td>
                                             <td>
-                                                <button className="btn btn-sm btn-outline-primary me-2">Edit
+                                                <button className="btn btn-sm btn-outline-primary me-2">
+                                                    Edit
                                                 </button>
-                                                <button className="btn btn-sm btn-outline-danger">Delete</button>
+                                                <button className="btn btn-sm btn-outline-danger">
+                                                    Delete
+                                                </button>
                                             </td>
                                         </tr>
-                                    )
-                                })
-                                }
-
-
+                                    );
+                                })}
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>);
-
+            <Modal
+                isOpen={isCreateProductFormOpen}
+                onRequestClose={() => setCreateProductFormOpen(false)}
+                contentLabel="Create Product"
+                ariaHideApp={false}
+            >
+                <CreateProductForm />
+            </Modal>
+        </div>
+    );
 }
-
 
 export default DashboardProducts;

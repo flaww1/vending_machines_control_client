@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import './Products.css';
 
-const ProductList = () => {
-    // Sample product data
-    const products = [
-        { productId: 1, name: 'Product 1', price: 10.99 },
-        { productId: 2, name: 'Product 2', price: 15.99 },
-        { productId: 3, name: 'Product 3', price: 12.99 },
-    ];
+function ProductList() {
+
+    const token =localStorage.getItem('usertoken');
+
+    const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+    };
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/store/products', { headers })
+            .then((response) => response.json())
+            .then((jsonResponse) => setData(jsonResponse.products));
+    }, []);
+
 
     return (
         <div className="container">
             <h1>Products</h1>
-            <div className="row">
-                {products.map((product) => (
-                    <div className="col-md-4" key={product.productId}>
+            <div className="d-flex flex-wrap justify-content-around">
+                {data.map(product => (
+                    <div className="p-2" key={product.productId}>
                         <ProductCard product={product} />
                     </div>
                 ))}
             </div>
         </div>
     );
-};
+}
 
 export default ProductList;

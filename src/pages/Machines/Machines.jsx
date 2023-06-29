@@ -1,28 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import MachineCard from "../../components/MachineCard/MachineCard.jsx";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import MachineCard from '../../components/MachineCard/MachineCard';
 
-const MachinesPage = () => {
-    // Sample machine data
-    const machines = [
-        { id: 1, name: 'Machine 1', location: 'Location 1' },
-        { id: 2, name: 'Machine 2', location: 'Location 2' },
-        { id: 3, name: 'Machine 3', location: 'Location 3' },
-    ];
+const MachineList = () => {
+    const [machines, setMachines] = useState([]);
+
+    useEffect(() => {
+        // Fetch machines from the server
+        axios
+            .get('http://localhost:5000/store/machines/', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('usertoken')}`,
+                },
+            })
+            .then(response => {
+                setMachines(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching machines:', error);
+            });
+    }, []);
 
     return (
         <div className="container">
             <h1>Machines</h1>
             <div className="row">
-                {machines.map((machine) => (
+                {machines.map(machine => (
                     <div className="col-md-4" key={machine.machineId}>
                         <MachineCard machine={machine} />
                     </div>
                 ))}
             </div>
         </div>
-
     );
 };
 
-export default MachinesPage;
+
+export default MachineList;

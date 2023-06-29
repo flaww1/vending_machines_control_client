@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, {Component} from "react";
+import axios from "axios";
+const getUserTypes = () => {
+    // Retrieve the enum values from the server or define them manually
+    return ['USER', 'ADMINISTRATOR', 'PROVIDER'];
+};
 
-class Registration extends Component {
+class CreateUserForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,7 +13,7 @@ class Registration extends Component {
             last_name: '',
             email: '',
             password: '',
-            type: 'USER', // Set the default value for the "type" field
+            type: '', // Set the default value for the "type" field
             errors: {},
         };
 
@@ -36,11 +40,13 @@ class Registration extends Component {
             .post('http://localhost:5000/auth/register', newUser)
             .then((response) => {
                 console.log('Registered');
-                this.props.history.push('/login');
+                console.log(response.data);
+
+                this.props.history.push('/dashboard');
             })
             .catch((error) => {
                 if (error.response && error.response.data && error.response.data.message) {
-                    this.setState({ errors: { email: error.response.data.message } });
+                    this.setState({ errors: { image_uri: error.response.data.message, price: error.response.data.message } });
                 } else {
                     console.error('An error occurred:', error);
                 }
@@ -55,7 +61,7 @@ class Registration extends Component {
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>
-                            <h1 className="h3 mb-3 font-weight-normal">Register</h1>
+                            <h1 className="h3 mb-3 font-weight-normal">Create User</h1>
                             <div className="form-group">
                                 <label htmlFor="name">First name</label>
                                 <input
@@ -104,9 +110,28 @@ class Registration extends Component {
                                 />
                                 {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                             </div>
+                            <div className="mb-3">
+                                <label htmlFor="type" className="form-label">User Type:</label>
+                                <select
+                                    id="type"
+                                    name="type"
+                                    value={this.state.type}
+                                    onChange={this.onChange}
+                                    className={`form-control ${errors.type ? 'is-invalid' : ''}`}
+                                    required
+                                >
+                                    <option value="">Select Type</option>
+                                    {getUserTypes().map((type) => (
+                                        <option key={type} value={type}>{type}</option>
+                                    ))}
+                                </select>
+                                {errors.type && <div className="invalid-feedback">{errors.type}</div>}
+                            </div>
                             <button type="submit" className="btn btn-lg btn-primary btn-block">
                                 Register!
                             </button>
+                            <button type="button" onClick={this.onClose} className="btn btn-secondary">Close</button>
+
                         </form>
                     </div>
                 </div>
@@ -115,4 +140,4 @@ class Registration extends Component {
     }
 }
 
-export default Registration;
+export default CreateUserForm;

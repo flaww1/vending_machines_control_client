@@ -1,15 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function ProductCard({ productId, title, description, image }) {
+function ProductCard({ product }) {
+    const { productId, name, price, description, image } = product;
+
     return (
-        <div className="product-card">
-            <img src={image} alt="Product Image" className="product-image" />
-            <h3 className="product-title">{title}</h3>
-            <p className="product-description">{description}</p>
-            <Link to={`/product/${productId}`} className="product-link">
+        <div className="card border border-primary product-card">
+            <div className="card-body">
+            <h3 className="card-title">{name}</h3>
+            <p className="card-text">${price}</p>
+            <Link to={`/product/${productId}`} className="btn btn-primary">
                 View Details
             </Link>
+        </div>
         </div>
     );
 }

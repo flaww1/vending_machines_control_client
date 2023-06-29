@@ -1,11 +1,20 @@
 import React, {useEffect, useState} from 'react';
+import Modal from 'react-modal';
+import CreateMachineForm from '../../components/CreateForms/CreateMachineForm.jsx';
+
+
 import './AdminDashboard.css';
 
 
 function DashboardMachines() {
+
+    const [isCreateMachineFormOpen, setCreateMachineFormOpen] = useState(false);
+
+    const handleCreateMachineClick = () => {
+        setCreateMachineFormOpen(true);
+    };
     const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTY4NTM2NDA2MCwiZXhwIjoxNjg3OTU2MDYwfQ.zbDnYOWxvplEBP3redatqu1N7DtO3vpdhE8nFJF8B_w';
-    const headers = {
+        localStorage.getItem('usertoken');    const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
         "Accept": 'application/json'
@@ -79,8 +88,11 @@ function DashboardMachines() {
                     <div className="row my-5">
                         <h3 className="fs-4 mb-3">Machines</h3>
                         <div className="col">
-
-
+                            <div className="mb-3">
+                                <button className="btn btn-primary" onClick={handleCreateMachineClick}>
+                                    Create Machine
+                                </button>
+                            </div>
                             <table className="table bg-white rounded shadow-sm table-hover">
                                 <thead>
                                 <tr>
@@ -108,12 +120,19 @@ function DashboardMachines() {
 
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
                 </div>
             </div>
+            {/* Modal */}
+            <Modal
+                isOpen={isCreateMachineFormOpen}
+                onRequestClose={() => setCreateMachineFormOpen(false)}
+                contentLabel="Create Machine Modal"
+                ariaHideApp={false}
+            >
+                <CreateMachineForm />
+            </Modal>
         </div>
     );
 }
