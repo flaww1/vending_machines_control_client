@@ -10,6 +10,8 @@ function App() {
         <div className="App">
             <Navbar/>
             <Outlet/>
+            <div className="container text-center">
+            </div>
             <Footer/>
 
         </div>

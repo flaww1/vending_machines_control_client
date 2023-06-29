@@ -20,6 +20,8 @@ class CreateProductForm extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClose = this.onClose.bind(this);
+
     }
 
     onChange(e)
@@ -61,6 +63,17 @@ class CreateProductForm extends Component {
                     console.error('An error occurred:', error);
                 }
             });
+    }
+    onClose() {
+        // Clear the form fields and close the modal
+        this.setState({
+            name: '',
+            image_uri: '',
+            description: '',
+            type: '',
+            price: 0,
+        });
+        this.props.onClose(); // Call the onClose prop passed from the parent to close the modal
     }
 
     render() {

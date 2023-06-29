@@ -20,6 +20,7 @@ import './components/MachineCard/MachineCard.css';
 import './pages/AdminDashboard/AdminDashboard.css';
 import App from "./App.jsx";
 import Home from './pages/Home/Home';
+import UserReservations from "./pages/Reservations/Reservations.jsx";
 import Login from './pages/Login/Login';
 import Registration from "./pages/Registration/Registration.jsx";
 import Products from "./pages/Products/Products.jsx";
@@ -60,10 +61,15 @@ const router = createBrowserRouter([{
         {
             path: "/products/:productId",
             element: <ProductPage/>,
+
         },
         {
           path: "/machines",
             element: <Machines/>,
+        },
+        {
+           path: "/reservations",
+            element: <UserReservations/>,
         },
         {
             path: "/machine/:machineId",
@@ -104,7 +110,9 @@ const router = createBrowserRouter([{
         {
             path: "/dashboard/companies",
             element: <DashboardCompanies/>,
-        }
+        },
+
+
 
 
 

@@ -51,6 +51,15 @@ function Navbar({ user, handleLogout }) {
                             Dashboard
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/reservations"
+                        >
+                           Reservations
+                        </NavLink>
+                    </li>
                 </>
             );
         }

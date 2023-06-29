@@ -41,6 +41,8 @@ class CreateMachineForm extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClose = this.onClose.bind(this);
+
     }
 
     componentDidMount() {
@@ -57,11 +59,6 @@ class CreateMachineForm extends Component {
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
-    }
-
-    onClose() {
-        this.setState({ showModal: false });
-
     }
     onSubmit(e) {
         e.preventDefault();
@@ -89,6 +86,20 @@ class CreateMachineForm extends Component {
                 }
             });
     }
+    onClose() {
+        // Clear the form fields and close the modal
+        this.setState({
+            machineModels: [],
+            showModal: false,
+            modelId: 0,
+            type: '',
+            status: '',
+            energyMode: '',
+            location: '',
+        });
+        this.props.onClose(); // Call the onClose prop passed from the parent to close the modal
+    }
+
 
     render() {
         const { errors } = this.state;

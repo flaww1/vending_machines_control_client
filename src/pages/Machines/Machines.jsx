@@ -1,39 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import MachineCard from '../../components/MachineCard/MachineCard';
+import MachineCard from '../../components/MachineCard/MachineCard'
+import './Machines.css';
 
-const MachineList = () => {
-    const [machines, setMachines] = useState([]);
+function ProductList() {
+
+    const token =localStorage.getItem('usertoken');
+
+    const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+    };
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        // Fetch machines from the server
-        axios
-            .get('http://localhost:5000/store/machines/', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('usertoken')}`,
-                },
-            })
-            .then(response => {
-                setMachines(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching machines:', error);
-            });
+        fetch('http://localhost:5000/store/machines', { headers })
+            .then((response) => response.json())
+            .then((jsonResponse) => setData(jsonResponse.machines));
     }, []);
+
 
     return (
         <div className="container">
             <h1>Machines</h1>
-            <div className="row">
-                {machines.map(machine => (
-                    <div className="col-md-4" key={machine.machineId}>
-                        <MachineCard machine={machine} />
+            <div className="d-flex flex-wrap justify-content-around">
+                {data.map(machine => (
+                    <div className="p-2" key={machine.machineId}>
+                        <MachineCard product={machine} />
                     </div>
                 ))}
             </div>
         </div>
     );
-};
+}
 
-
-export default MachineList;
+export default ProductList;

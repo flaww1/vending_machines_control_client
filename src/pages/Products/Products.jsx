@@ -23,7 +23,7 @@ function ProductList() {
 
     return (
         <div className="container">
-            <h1>Products</h1>
+
             <div className="d-flex flex-wrap justify-content-around">
                 {data.map(product => (
                     <div className="p-2" key={product.productId}>
