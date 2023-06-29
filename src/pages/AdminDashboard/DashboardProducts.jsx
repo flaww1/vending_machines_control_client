@@ -76,7 +76,6 @@ function DashboardProducts() {
                                     <th scope="col">ID</th>
                                     <th scope="col">Product</th>
                                     <th scope="col">Type</th>
-                                    <th scope="col">Image</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Options</th>
@@ -89,9 +88,6 @@ function DashboardProducts() {
                                             <th scope="row">{product.productId}</th>
                                             <td>{product.name}</td>
                                             <td>{product.type}</td>
-                                            <td>
-                                                <img src={product.image} alt="product" width="100px" />
-                                            </td>
                                             <td>{product.description}</td>
                                             <td>{product.price}</td>
                                             <td>
