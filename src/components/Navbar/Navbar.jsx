@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+
 function Navbar({ user, handleLogout }) {
+
+
     const renderAuthButtons = () => {
         if (user) {
             return (
@@ -46,7 +49,7 @@ function Navbar({ user, handleLogout }) {
                         <NavLink
                             className="nav-link"
                             activeClassName="active"
-                            to="/dashboard"
+                            to="/dashboard/products"
                         >
                             Dashboard
                         </NavLink>
@@ -60,6 +63,18 @@ function Navbar({ user, handleLogout }) {
                            Reservations
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+
+                        <NavLink
+                            className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                            to="/"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </NavLink>
+                    </li>
+
+
                 </>
             );
         }

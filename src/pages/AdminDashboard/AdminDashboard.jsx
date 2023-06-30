@@ -27,18 +27,12 @@ function Dashboard() {
                     <a href="/dashboard/companies" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i className="fas fa-comment-dots me-2"></i>Companies
                     </a>
-                    <a href="/dashboard/maintenancerequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Maintenance Requests
-                    </a>
-                    <a href="/dashboard/restockrequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Restock Requests
-                    </a>
+
 
 
 
                 </div>
             </div>
-            {/* /#sidebar-wrapper */}
 
             {/* Page Content */}
             <div id="page-content-wrapper">

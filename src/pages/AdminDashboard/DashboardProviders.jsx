@@ -36,18 +36,8 @@ function DashboardProviders() {
                     <a href="/dashboard/reservations" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i className="fas fa-shopping-cart me-2"></i>Reservations
                     </a>
-                    <a href="/dashboard/providers" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-gift me-2"></i>Providers
-                    </a>
-                    <a href="/dashboard/companies" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Companies
-                    </a>
-                    <a href="/dashboard/maintenancerequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Maintenance Requests
-                    </a>
-                    <a href="/dashboard/restockrequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Restock Requests
-                    </a>
+
+
                 </div>
             </div>
             {/* /#sidebar-wrapper */}
@@ -56,7 +46,7 @@ function DashboardProviders() {
             <div id="page-content-wrapper">
                 <div className="container-fluid px-4">
                     <div className="row my-5">
-                        <h3 className="fs-4 mb-3">Reservations</h3>
+                        <h3 className="fs-4 mb-3">Providers</h3>
                         <div className="col">
                             <table className="table bg-white rounded shadow-sm table-hover">
                                 <thead>
@@ -66,7 +56,7 @@ function DashboardProviders() {
                                     <th scope="col">Phone</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Company</th>
-                                    <th scope="col">Options</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -79,11 +69,7 @@ function DashboardProviders() {
                                             <td>{provider.phone}</td>
                                             <td>{provider.User.email}</td>
                                             <td>{provider.Company.name}</td>
-                                            <td>
-                                                <button className="btn btn-sm btn-outline-primary me-2">Edit
-                                                </button>
-                                                <button className="btn btn-sm btn-outline-danger">Delete</button>
-                                            </td>
+
                                         </tr>
                                     )
                                 })

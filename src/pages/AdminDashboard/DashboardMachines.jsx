@@ -4,11 +4,13 @@ import CreateMachineForm from '../../components/CreateForms/CreateMachineForm.js
 
 
 import './AdminDashboard.css';
+import axios from "axios";
 
 
 function DashboardMachines() {
 
     const [isCreateMachineFormOpen, setCreateMachineFormOpen] = useState(false);
+
 
     const handleCreateMachineClick = () => {
         setCreateMachineFormOpen(true);
@@ -27,25 +29,17 @@ function DashboardMachines() {
             .then(jsonResponse => setData(jsonResponse.machines));
     }, []);
 
-    const handleDeleteMachine = (machineId) => {
-        // Make a DELETE request to your API to delete the request with the given ID
-        fetch(`http://localhost:5000/dashboard/admin/delete-machine/${machineId}`, {
-            method: 'DELETE',
-            headers: headers
-        })
-            .then(response => {
-                if (response.ok) {
-                    // Remove the deleted machine from the data state
-                    setData(prevData => prevData.filter(machine => machine.machineId !== machineId));
-                } else {
-                    console.error('Failed to delete machine');
-                }
+    const handleDelete = (machineId) => {
+        // Replace with your API endpoint
+        axios
+            .delete(`http://localhost:5000/dashboard/admin/delete-machine/${machineId}`, { headers })
+            .then((response) => {
+                setData(data.filter((machine) => machine.machineId !== machineId));
             })
-            .catch(error => {
-                console.error('Error occurred while deleting machine', error);
+            .catch((error) => {
+                console.error('Error deleting reservation: ', error);
             });
     };
-
 
 
     return (
@@ -66,18 +60,8 @@ function DashboardMachines() {
                     <a href="/dashboard/reservations" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i className="fas fa-shopping-cart me-2"></i>Reservations
                     </a>
-                    <a href="/dashboard/providers" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-gift me-2"></i>Providers
-                    </a>
-                    <a href="/dashboard/companies" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Companies
-                    </a>
-                    <a href="/dashboard/maintenancerequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Maintenance Requests
-                    </a>
-                    <a href="/dashboard/restockrequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Restock Requests
-                    </a>
+
+
 
                 </div>
             </div>
@@ -111,9 +95,13 @@ function DashboardMachines() {
                                         <td>{machine.status}</td>
                                         <td>{machine.location}</td>
                                         <td>
-                                            <button className="btn btn-sm btn-outline-primary me-2">Edit
+
+                                            <button
+                                                className="btn btn-sm btn-outline-danger me-2"
+                                                onClick={() => handleDelete(machine.machineId)}
+                                            >
+                                                Delete
                                             </button>
-                                            <button className="btn btn-sm btn-outline-danger" onClick={() => handleDeleteMachine(machine.machineId)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}

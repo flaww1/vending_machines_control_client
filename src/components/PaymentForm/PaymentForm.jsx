@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './paymentForm.css';
 class PaymentForm extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -26,11 +27,9 @@ class PaymentForm extends Component {
 
 
         const newPayment = {
-
             reservationId : this.props.selectedReservation,
-            paymentAmount : this.props.paymentAmount,
+            paymentAmount : this.state.paymentAmount,
         };
-
         const token = localStorage.getItem('usertoken');
 
         const headers = {
@@ -44,11 +43,11 @@ class PaymentForm extends Component {
             .then((response) => {
                 console.log('Payment Created');
                 console.log(response.data);
-                this.props.history.push('/reservations');
+                history.push('/reservations');
             })
             .catch((error) => {
                 if (error.response && error.response.data && error.response.data.message) {
-                    this.setState({ errors: {} });
+                    this.setState({ errors: { paymentAmount: error.response.data.message } });
                 } else {
                     console.error('An error occurred:', error);
                 }
@@ -96,7 +95,7 @@ class PaymentForm extends Component {
                             Pay
                         </button>
                         <button className="btn btn-secondary" type="button" onClick={this.onClose}>
-                            Cancel
+                            Back
                         </button>
                     </form>
                 </div>

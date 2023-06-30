@@ -48,22 +48,8 @@ function DashboardUsers() {
                        className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i className="fas fa-shopping-cart me-2"></i>Reservations
                     </a>
-                    <a href="/dashboard/providers"
-                       className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-gift me-2"></i>Providers
-                    </a>
-                    <a href="/dashboard/companies"
-                       className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Companies
-                    </a>
-                    <a href="/dashboard/maintenancerequests"
-                       className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Maintenance Requests
-                    </a>
-                    <a href="/dashboard/restockrequests"
-                       className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Restock Requests
-                    </a>
+
+
                 </div>
             </div>
             {/* /#sidebar-wrapper */}
@@ -88,8 +74,8 @@ function DashboardUsers() {
                                     <th scope="col">Email</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Registration Date</th>
-                                    <th scope="col">isVerified</th>
-                                    <th scope="col">Options</th>
+
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -102,10 +88,8 @@ function DashboardUsers() {
                                             <td>{user.email}</td>
                                             <td>{user.type}</td>
                                             <td>{user.registration_date}</td>
-                                            <td>{user.isVerified}</td>
-                                            <td>
-                                                <button className="btn btn-sm btn-outline-primary me-2">Edit</button>
-                                            </td>
+
+
                                         </tr>
                                     );
                                 })}

@@ -5,7 +5,7 @@ const getProductTypes = () => {
     // Retrieve the enum values from the server or define them manually
     return ['COLD_DRINK', 'HEATED_DRINK', 'SNACK', 'OTHER'];
 };
-class CreateProductForm extends Component {
+class EditProductForm extends Component {
     constructor(props)
     {
         super(props);
@@ -31,8 +31,9 @@ class CreateProductForm extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        const { editProductId } = this.props; // Retrieve the product ID from the props
 
-        const newProduct = {
+        const editProduct = {
             name: this.state.name,
             image_uri: this.state.image_uri,
             description: this.state.description,
@@ -50,9 +51,9 @@ class CreateProductForm extends Component {
 
 
         axios
-            .post('http://localhost:5000/dashboard/admin/create-product/', newProduct, { headers })
+            .put(`http://localhost:5000/dashboard/admin/update-product/${editProductId}`, editProduct, { headers })
             .then((response) => {
-                console.log('Product Created');
+                console.log('Product Edited');
                 console.log(response.data);
                 this.props.history.push('/dashboard');
             })
@@ -78,10 +79,12 @@ class CreateProductForm extends Component {
 
     render() {
         const {errors} = this.state;
+        const { editProductId} = this.props;
+
         return (
             <div className="modal-overlay">
                 <div className="modal-content">
-                    <h3>Create Product</h3>
+                    <h3>Edit Product</h3>
                     <form onSubmit={this.onSubmit}>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Name:</label>
@@ -156,7 +159,7 @@ class CreateProductForm extends Component {
                             {errors.price && <div className="invalid-feedback">{errors.price}</div>}
 
                         </div>
-                        <button type="submit" className="btn btn-primary">Create Product</button>
+                        <button type="submit" className="btn btn-primary">Edit Product</button>
                         <button type="button" onClick={this.onClose} className="btn btn-secondary">Close</button>
                     </form>
                 </div>
@@ -166,4 +169,4 @@ class CreateProductForm extends Component {
     }
 }
 
-export default CreateProductForm;
+export default EditProductForm;

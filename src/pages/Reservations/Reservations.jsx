@@ -34,7 +34,7 @@ function UserReservations() {
 
     const handleCancelReservation = (reservationId) => {
         // Replace with your API endpoint
-        axios.post(`http://localhost:5000/reservations/cancel/${reservationId}`, { headers })
+        axios.put(`http://localhost:5000/reservations/cancel/${reservationId}`, {}, { headers })
             .then((response) => {
                 setReservations(reservations.filter(reservation => reservation.reservationId !== reservationId));
             })

@@ -55,18 +55,8 @@ function DashboardMaintenanceRequests() {
                     <a href="/dashboard/reservations" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                         <i className="fas fa-shopping-cart me-2"></i>Reservations
                     </a>
-                    <a href="/dashboard/providers" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-gift me-2"></i>Providers
-                    </a>
-                    <a href="/dashboard/companies" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Companies
-                    </a>
-                    <a href="/dashboard/maintenancerequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Maintenance Requests
-                    </a>
-                    <a href="/dashboard/restockrequests" className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                        <i className="fas fa-comment-dots me-2"></i>Restock Requests
-                    </a>
+
+
 
                 </div>
             </div>

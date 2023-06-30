@@ -46,35 +46,47 @@ function ProductDetails() {
                     </button>
                 </div>
             </div>
-            <div className="row mt-5">
-                <div className="col-lg-12">
-                    <h2>Machine Details</h2>
-                </div>
-                {data.Product_Shelf &&
-                    data.Product_Shelf.map((productShelf) => (
-                        <div className="col-lg-4 col-md-6 mb-4" key={productShelf.shelfId}>
-                            <div className="card h-100">
-                                <div className="card-body">
-                                    <h4 className="card-title">Machine ID: {productShelf.shelf.Machine.machineId}</h4>
-                                    <h5>Shelf ID: {productShelf.shelfId}</h5>
-                                    <p className="card-text">
-                                        <strong>Quantity:</strong> {productShelf.quantity_inSlot}<br />
-                                        <strong>Location:</strong> {productShelf.shelf.Machine.location}<br />
-                                        <strong>Status:</strong> {productShelf.shelf.Machine.status}
-                                    </p>
-                                </div>
-                                <div className="card-footer">
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={() => handleReserveButtonClick(productShelf.shelf.Machine.machineId, productShelf.shelfId)}
-                                    >
-                                        Reserve From Machine
-                                    </button>
-                                </div>
-                            </div>
+            {
+                data.Product_Shelf && data.Product_Shelf.some(productShelf => productShelf.shelf.Machine) && (
+                    <div className="row mt-5">
+                        <div className="col-lg-12">
+                            <h2>Machine Details</h2>
                         </div>
-                    ))}
-            </div>
+                        {data.Product_Shelf.map((productShelf, index) =>
+                            productShelf.shelf.Machine ? (
+                                <div className="col-lg-4 col-md-6 mb-4" key={index}>
+                                    <div className="card h-100">
+                                        <div className="card-body">
+                                            <h4 className="card-title">Machine ID: {productShelf.shelf.Machine.machineId}</h4>
+                                            <h5>Shelf ID: {productShelf.shelfId}</h5>
+                                            <p className="card-text">
+                                                <strong>Quantity:</strong> {productShelf.quantity_inSlot}<br />
+                                                <strong>Location:</strong> {productShelf.shelf.Machine.location}<br />
+                                                <strong>Status:</strong> {productShelf.shelf.Machine.status} <br />
+
+                                            </p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={() =>
+                                                    handleReserveButtonClick(
+                                                        productShelf.shelf.Machine.machineId,
+                                                        productShelf.shelfId
+                                                    )
+                                                }
+                                            >
+                                                Reserve From Machine
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : null
+                        )}
+                    </div>
+                )
+            }
+
             <Modal isOpen={showReservationForm} onRequestClose={() => setShowReservationForm(false)}>
                 <ReservationForm
                     productId={productId}
